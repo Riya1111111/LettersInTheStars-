@@ -4,27 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#170d20">
-
-<title>Letter to the Gummy Bear I Know ✨</title>
+<title>Letter to the Bubu I Know ✨</title>
 
 <style>
-* {
-  box-sizing: border-box;
+:root {
+  --bg: #170d20;
+  --wine: #351426;
+  --rose: #e7a8b5;
+  --gold: #e9c98a;
+  --paper: #fff8ed;
+  --ink: #49313b;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Georgia, "Times New Roman", serif;
   color: #fff4ef;
+  font-family: Georgia, "Times New Roman", serif;
   background: radial-gradient(
-    ellipse at top,
+    ellipse at 50% 0%,
     #51223e 0%,
-    #241329 45%,
+    #241329 42%,
     #100b18 100%
   );
   overflow-x: hidden;
@@ -35,22 +39,24 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.28;
   background-image:
-    radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+    radial-gradient(1px 1px at 10% 20%, #fff 99%, transparent),
     radial-gradient(1px 1px at 80% 30%, #ffd9a3 99%, transparent),
-    radial-gradient(1px 1px at 45% 75%, white 99%, transparent);
+    radial-gradient(1px 1px at 45% 75%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 92% 84%, #fff 99%, transparent);
   background-size: 190px 190px;
-  animation: twinkle 5s infinite alternate;
+  animation: twinkle 5s ease-in-out infinite alternate;
 }
 
 @keyframes twinkle {
-  to { opacity: 0.7; }
+  to { opacity: 0.65; }
 }
 
 .lights {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 95px;
   display: flex;
@@ -92,14 +98,14 @@ body::before {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font: 11px Arial, sans-serif;
-  color: #e9c98a;
+  color: var(--gold);
 }
 
 h1 {
   font-weight: normal;
   font-size: clamp(35px, 7vw, 66px);
-  line-height: 1.1;
-  margin: 18px 0;
+  line-height: 1.05;
+  margin: 18px 0 12px;
   color: #fff0e7;
   text-shadow: 0 4px 30px #d77a9a55;
 }
@@ -117,6 +123,7 @@ h1 {
   display: grid;
   place-items: center;
   perspective: 1000px;
+  margin: 15px auto 18px;
 }
 
 .envelope {
@@ -180,11 +187,11 @@ h1 {
   right: 7%;
   bottom: 7px;
   height: 170px;
-  background: #fff8ed;
+  background: var(--paper);
   border-radius: 4px;
   transition: transform 1s 0.35s;
   z-index: 2;
-  color: #49313b;
+  color: var(--ink);
   padding: 20px;
   font-size: 14px;
 }
@@ -218,7 +225,7 @@ h1 {
   text-align: left;
   max-width: 720px;
   background: linear-gradient(145deg, #fffaf2, #f5e8dc);
-  color: #49313b;
+  color: var(--ink);
   padding: clamp(25px, 6vw, 58px);
   border-radius: 4px;
   box-shadow: 0 25px 70px #0008;
@@ -325,10 +332,12 @@ button {
 @media (max-width: 600px) {
   .wrap { padding-top: 65px; }
   .envelope-area { height: 245px; }
+
   .letter-body p {
     font-size: 15px;
     line-height: 1.85;
   }
+
   #letter { padding: 30px 24px; }
 }
 </style>
@@ -347,7 +356,7 @@ button {
 
   <div class="kicker">A little piece of my heart</div>
 
-  <h1>Letter to the Gummy Bear I Know</h1>
+  <h1>Letter to the Bubu I Know</h1>
 
   <p class="subtitle">
     Some feelings deserve more than a message.<br>
@@ -382,7 +391,7 @@ button {
       With love, on Diwali
     </div>
 
-    <h2>To my dearest Gummy Bear,</h2>
+    <h2>To my dearest Bubu,</h2>
 
     <p class="greeting">
       Happy Diwali, my love. ❤️
@@ -486,6 +495,29 @@ button {
       </p>
 
       <p>
+        You know, Bubu, no matter how much time passes
+        or how much things change between us, a part of
+        me will always see you as that little boy who
+        used to be so clingy with me, who would do the
+        silliest and stupidest things just to make me
+        smile whenever I was having a bad day.
+        I still remember that side of you so clearly,
+        and it's one of the things I miss the most.
+        You never needed to do anything extraordinary
+        to make me happy. Sometimes, just having you
+        around, being your silly self, was enough to
+        make my worst days feel a little better.
+        And even now, when I think of you, I don't just
+        see the person you've become. I still see that
+        same adorable, silly Bubu who always found a
+        way to make me laugh, even when I didn't feel
+        like smiling. I miss him. I miss that version
+        of us. And I wish I could hold that little boy
+        close to my heart and remind him how much he
+        has always meant to me. ❤️
+      </p>
+
+      <p>
         I love you. I loved you then, I love you now,
         and I know a part of me will continue to love you.
         I am genuinely proud of you, Tarun. I hope you
@@ -553,7 +585,6 @@ button {
     </div>
 
     <div class="signoff">
-
       <strong>Happy Diwali, Tarun.</strong>
 
       <br><br>
@@ -571,7 +602,6 @@ button {
 
       With love,<br>
       <strong>Riya</strong>
-
     </div>
 
   </article>
