@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170d20">
+
+<title>Letter to the Gummy Bear I Know ✨</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #fff4ef;
+  background: radial-gradient(
+    ellipse at top,
+    #51223e 0%,
+    #241329 45%,
+    #100b18 100%
+  );
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+    radial-gradient(1px 1px at 80% 30%, #ffd9a3 99%, transparent),
+    radial-gradient(1px 1px at 45% 75%, white 99%, transparent);
+  background-size: 190px 190px;
+  animation: twinkle 5s infinite alternate;
+}
+
+@keyframes twinkle {
+  to { opacity: 0.7; }
+}
+
+.lights {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lights span {
+  width: 9px;
+  height: 13px;
+  margin-top: 17px;
+  border-radius: 50%;
+  background: #ffd88a;
+  box-shadow: 0 0 14px 5px #ffbd68;
+  animation: glow 2s infinite alternate;
+}
+
+.lights span:nth-child(even) {
+  animation-delay: 0.8s;
+  background: #ff9eae;
+  box-shadow: 0 0 14px 5px #ff819a;
+}
+
+@keyframes glow {
+  to { opacity: 0.45; }
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: auto;
+  padding: 75px 20px 70px;
+  text-align: center;
+}
+
+.kicker {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font: 11px Arial, sans-serif;
+  color: #e9c98a;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: clamp(35px, 7vw, 66px);
+  line-height: 1.1;
+  margin: 18px 0;
+  color: #fff0e7;
+  text-shadow: 0 4px 30px #d77a9a55;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #eacbd2;
+  line-height: 1.7;
+  margin: 0 auto 36px;
+  max-width: 540px;
+}
+
+.envelope-area {
+  height: 280px;
+  display: grid;
+  place-items: center;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  width: min(330px, 82vw);
+  height: 205px;
+  cursor: pointer;
+  filter: drop-shadow(0 22px 25px #0008);
+  transition: transform 0.5s;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: #9f5368;
+  border-radius: 8px;
+}
+
+.env-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #c47789, #8e405d);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 8px;
+}
+
+.flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #e0a0a8, #b65f78);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: top;
+  transition: transform 0.9s;
+  z-index: 4;
+}
+
+.seal {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, #f8dca8, #b77b42);
+  color: #71394b;
+  font-size: 22px;
+  transition: opacity 0.3s;
+}
+
+.letter-peek {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 7px;
+  height: 170px;
+  background: #fff8ed;
+  border-radius: 4px;
+  transition: transform 1s 0.35s;
+  z-index: 2;
+  color: #49313b;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.envelope.open .letter-peek {
+  transform: translateY(-125px);
+}
+
+.tap {
+  font: 12px Arial, sans-serif;
+  letter-spacing: 0.13em;
+  color: #eacbd2;
+  text-transform: uppercase;
+}
+
+#letter {
+  display: none;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s, transform 1s;
+  margin: 30px auto 0;
+  text-align: left;
+  max-width: 720px;
+  background: linear-gradient(145deg, #fffaf2, #f5e8dc);
+  color: #49313b;
+  padding: clamp(25px, 6vw, 58px);
+  border-radius: 4px;
+  box-shadow: 0 25px 70px #0008;
+  position: relative;
+}
+
+#letter::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid #d8b9a8;
+  pointer-events: none;
+}
+
+#letter.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter-top {
+  text-align: center;
+  color: #a36b70;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+#letter h2 {
+  font-size: 28px;
+  font-weight: normal;
+  text-align: center;
+  color: #793d56;
+}
+
+.greeting {
+  text-align: center;
+  color: #9d6575;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.letter-body p {
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.signoff {
+  margin-top: 32px;
+  text-align: right;
+  font-style: italic;
+  color: #8a4c61;
+  line-height: 1.8;
+}
+
+.heartline {
+  text-align: center;
+  color: #bd7185;
+  font-size: 20px;
+  margin-top: 26px;
+}
+
+.footer {
+  margin-top: 32px;
+  color: #d8b7c4;
+  font-size: 13px;
+}
+
+button {
+  border: 1px solid #d9ad83;
+  background: transparent;
+  color: #f5d7c0;
+  padding: 11px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+.float-heart {
+  position: fixed;
+  bottom: -30px;
+  color: #e9a8b8;
+  opacity: 0;
+  pointer-events: none;
+  animation: rise 8s linear infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrap { padding-top: 65px; }
+  .envelope-area { height: 245px; }
+  .letter-body p {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  #letter { padding: 30px 24px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lights" aria-hidden="true">
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+</div>
+
+<div class="wrap">
+
+  <div class="kicker">A little piece of my heart</div>
+
+  <h1>Letter to the Gummy Bear I Know</h1>
+
+  <p class="subtitle">
+    Some feelings deserve more than a message.<br>
+    Open this when you're ready. ❤️
+  </p>
+
+  <div class="envelope-area">
+    <div
+      class="envelope"
+      id="envelope"
+      role="button"
+      tabindex="0"
+      aria-label="Open the letter"
+    >
+      <div class="env-back"></div>
+      <div class="letter-peek">
+        A letter, written with love…
+      </div>
+      <div class="env-front"></div>
+      <div class="flap"></div>
+      <div class="seal">♡</div>
+    </div>
+  </div>
+
+  <div class="tap" id="tap">
+    Tap the envelope to open
+  </div>
+
+  <article id="letter">
+
+    <div class="letter-top">
+      With love, on Diwali
+    </div>
+
+    <h2>To my dearest Gummy Bear,</h2>
+
+    <p class="greeting">
+      Happy Diwali, my love. ❤️
+    </p>
+
+    <div class="letter-body">
+
+      <p>
+        I miss you. I still find myself thinking about you,
+        about us, and about all the little things we shared.
+        Even though we still talk, it is so different from
+        how it used to be. I miss our closeness, our
+        conversations, the little moments, and being a part
+        of each other's everyday life. I miss being able
+        to call you mine.
+      </p>
+
+      <p>
+        I think I'm writing this because you deserve it
+        more than anyone. You deserve to know what's been
+        going on in my heart, the things I've wanted to say
+        but haven't always found the courage to express.
+        You deserve honesty from me, something I should
+        have given you all along. I don't want to leave
+        these feelings unspoken, especially when you've
+        been someone so incredibly special to me.
+      </p>
+
+      <p>
+        I know I hid things from you, and I know I pushed
+        you away. I hurt you, and you never deserved that.
+        My illness was part of what I was going through,
+        but it doesn't excuse the way I made you feel.
+        I'm truly sorry. I regret not being honest with
+        you and not letting you understand what was
+        happening with me.
+      </p>
+
+      <p>
+        I'm still struggling with my illness, just as I
+        was before. I haven't suddenly become better,
+        and I don't want to keep pretending that I'm okay
+        or hiding parts of myself anymore. I don't want
+        to keep things from you. I wish I had understood
+        sooner that I could have been honest instead of
+        shutting you out.
+      </p>
+
+      <p>
+        I regret pushing you away more than I can explain.
+        I wish I had opened up about what I was going through
+        and allowed you to be there for me. I always trusted
+        you, even when I struggled to share what was happening
+        inside me. Sometimes I wonder how different things
+        might have been if I had only communicated instead
+        of keeping everything inside.
+      </p>
+
+      <p>
+        I regret it all so much. Sometimes I wish I could
+        have another chance with you, not to pretend that
+        nothing ever happened, but to show you a different
+        side of me — the Riya who has nothing to hide from
+        you, who can be completely honest with you, and who
+        isn't afraid to let you in. I wish I could give you
+        all the love I have in my heart, the kind of love
+        you have always deserved from me. I wish I could
+        make you feel loved, valued, and appreciated in
+        every way you deserve.
+      </p>
+
+      <p>
+        I really need you by my side, Tarun. And I know
+        I can't ask that of you anymore because we're
+        not together like we used to be. I understand
+        that things are different now, and I respect that.
+        But that doesn't change how much I miss your
+        support, your presence, and simply knowing that
+        you were there beside me.
+      </p>
+
+      <p>
+        I miss having you as my person — someone I could
+        turn to, tell what was happening, and share the
+        things that were hurting me with. I miss your
+        reassurance and comfort. I'm not saying this to
+        make you responsible for what I'm going through
+        or to ask you to carry my struggles. I just want
+        to be honest about how much I miss you and the
+        closeness we once had. I wish I hadn't made you
+        feel unwanted when all along I never wanted to
+        lose you.
+      </p>
+
+      <p>
+        I don't expect you to forget what happened or
+        pretend that nothing hurt. I only hope you can
+        understand what I've been trying to say. You mean
+        so much to me, and what we had was never ordinary
+        to me.
+      </p>
+
+      <p>
+        I love you. I loved you then, I love you now,
+        and I know a part of me will continue to love you.
+        I am genuinely proud of you, Tarun. I hope you
+        achieve every dream you're working towards, keep
+        growing, find happiness, and receive all the
+        beautiful things life has waiting for you.
+      </p>
+
+      <p>
+        I'll always be on your side, cheering for you
+        and wishing you the best for as long as I live.
+        Your happiness matters to me, and I hope you
+        never forget how proud I am of the person you
+        are and the person you're becoming.
+      </p>
+
+      <p>
+        I wish we could celebrate Diwali together,
+        share the happiness, and make more memories.
+        I wish I hadn't let things come between us,
+        and I wish I had protected what we had.
+        Still, I'm grateful for every moment we shared
+        and for having had someone like you in my life.
+      </p>
+
+      <p>
+        I don't know what the future holds, but I know
+        that I still care about you deeply. I miss you,
+        I think of you, and I have so much love for you
+        in my heart.
+      </p>
+
+      <p>
+        This Diwali, I pray that you are always happy,
+        healthy, safe, and surrounded by people who
+        love you. May every effort you make bring you
+        closer to your dreams. May your life be filled
+        with peace, light, success, and all the
+        happiness you deserve.
+      </p>
+
+    </div>
+
+    <div class="heartline">
+      ♡ &nbsp; ✦ &nbsp; ♡
+    </div>
+
+    <div class="signoff">
+
+      <strong>Happy Diwali, Tarun.</strong>
+
+      <br><br>
+
+      I hope you know that somewhere, someone is
+      incredibly proud of you, misses you more than
+      words can explain, and wishes nothing but
+      the best for you.
+
+      <br><br>
+
+      I love you, and I'm always rooting for you.
+
+      <br><br>
+
+      With love,<br>
+      <strong>Riya</strong>
+
+    </div>
+
+  </article>
+
+  <div class="footer">
+    Made with love, just for you. ✨
+  </div>
+
+  <button id="again" type="button">
+    Close the letter
+  </button>
+
+</div>
+
+<script>
+const env = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const tap = document.getElementById("tap");
+const again = document.getElementById("again");
+
+function openLetter() {
+  if (env.classList.contains("open")) return;
+
+  env.classList.add("open");
+  tap.textContent = "A little something from my heart";
+
+  setTimeout(() => {
+    letter.classList.add("visible");
+
+    letter.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }, 950);
+
+  hearts();
+}
+
+function closeLetter() {
+  letter.classList.remove("visible");
+  env.classList.remove("open");
+  tap.textContent = "Tap the envelope to open";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+env.addEventListener("click", openLetter);
+
+env.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    openLetter();
+  }
+});
+
+again.addEventListener("click", closeLetter);
+
+function hearts() {
+  for (let i = 0; i < 12; i++) {
+    const h = document.createElement("div");
+
+    h.className = "float-heart";
+    h.textContent = Math.random() > 0.5 ? "♡" : "♥";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDelay = Math.random() * 3 + "s";
+    h.style.fontSize = 14 + Math.random() * 18 + "px";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => h.remove(), 11000);
+  }
+}
+</script>
+
+</body>
+</html>
